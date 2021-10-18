@@ -1,0 +1,69 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<td>#</td>
+			<td>Tipo de Climatizador</td>
+			<td>Nombre</td>
+			<td>Marca</td>
+			<td>Modelo</td>
+			<td>Consumo</td>
+			<td>Linea</td>
+			<td>Activo</td>
+			<td>Acciones</td>
+		</tr>
+
+	</thead>
+	<tbody>
+		{% if electrodomestico %}
+		{% for electrodomestico in electrodomestico %}
+		<tr>
+			<td>{{ electrodomestico.id }}</td>
+			 {% if electrodomestico.TipoClima == "F" %}
+                 <td>Frio</td>
+			 {% endif %}
+			{% if electrodomestico.TipoClima == "C" %}
+                 <td>Calor</td>
+			{% endif %}
+			{% if electrodomestico.TipoClima == "M" %}
+                 <td>Mixto</td>
+			{% endif %}
+			<td>{{ electrodomestico.Nombre }}</td>
+			<td>{{ electrodomestico.Marca }}</td>
+			<td>{{ electrodomestico.Modelo }}</td>
+			<td>{{ electrodomestico.Consumo }}</td>
+			<td>{{ electrodomestico.Linea }}</td>
+			<td>{{ electrodomestico.Activo }}</td>
+			<td>
+				<a class="btn btn-primary" href="{% url 'editclima' electrodomestico.id %}">Editar</a>
+
+
+
+				<a class="btn btn-danger" href="{% url 'deleteclima' electrodomestico.id %}">Eliminar</a>
+
+
+			</td>
+		</tr>
+		{% endfor %}
+
+		{% else %}
+		<h1>No hay registros de climatizadores</h1>
+		{% endif %}
+	</tbody>
+</table>
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Next</a>
+    	{% endif %}
+    </li>
+</ul>
+{% endblock%}

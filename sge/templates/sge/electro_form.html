@@ -1,0 +1,15 @@
+{% extends 'base/base.html' %}
+{% block content %}
+<div class="col-md-8 col-md-offset-2">
+
+                    <p><label >Electrodomesticos</label> </p>
+
+    <div class="well well-sm">
+    <form method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit">Guardar</button>
+    </form>
+    </div>
+</div>
+{% endblock %}

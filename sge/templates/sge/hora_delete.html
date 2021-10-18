@@ -1,0 +1,31 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    {% if hora.Dia == "1" %}
+                 <h3>¿Desea eliminar el registro de Lunes</h3>
+			{% endif %}
+			{% if hora.Dia == "2" %}
+                 <h3>¿Desea eliminar el registro de Martes</h3>
+			{% endif %}
+			{% if hora.Dia == "3" %}
+                 <h3>¿Desea eliminar el registro de Miercoles</h3>
+			{% endif %}
+			{% if hora.Dia == "4" %}
+                 <h3>¿Desea eliminar el registro de Jueves</h3>
+			{% endif %}
+			{% if hora.Dia == "5" %}
+                 <h3>¿Desea eliminar el registro de Viernes</h3>
+			{% endif %}
+			{% if hora.Dia == "6" %}
+                 <h3>¿Desea eliminar el registro de Sabado</h3>
+			{% endif %}
+			{% if hora.Dia == "7" %}
+                <h3>¿Desea eliminar el registro de Domingo</h3>
+			{% endif %}
+
+    <button class="btm btn-danger" type="submit">Eliminar</button>
+    <a class="btn btn-default" href="{% url 'listhora' %}">Cancelar</a>
+</form>
+{% endblock %}

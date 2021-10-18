@@ -1,0 +1,55 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<td>#</td>
+			<td>Nombre</td>
+			<td>Consumo</td>
+			<td>Linea</td>
+			<td>Activo</td>
+			<td>Acciones</td>
+		</tr>
+
+	</thead>
+	<tbody>
+		{% if electrodomestico %}
+		{% for electrodomestico in electrodomestico %}
+		<tr>
+			<td>{{ electrodomestico.id }}</td>
+			<td>{{ electrodomestico.Nombre }}</td>
+			<td>{{ electrodomestico.Consumo }}</td>
+			<td>{{ electrodomestico.Linea }}</td>
+			<td>{{ electrodomestico.Activo }}</td>
+			<td>
+				<a class="btn btn-primary" href="{% url 'editluz' electrodomestico.id %}">Editar</a>
+
+
+
+				<a class="btn btn-danger" href="{% url 'deleteluz' electrodomestico.id %}">Eliminar</a>
+
+
+			</td>
+		</tr>
+		{% endfor %}
+
+		{% else %}
+		<h1>No hay registros de iluminacion</h1>
+		{% endif %}
+	</tbody>
+</table>
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Next</a>
+    	{% endif %}
+    </li>
+</ul>
+{% endblock%}
