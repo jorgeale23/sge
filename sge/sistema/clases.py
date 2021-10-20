@@ -186,7 +186,7 @@ class HorasActivas:
                            (haux.lower.hour * 60) + haux.lower.minute)) * d[6]
 
        return (horatotal/60)
-
+#asd
 #ob = Solution()
 #intervals = [[datetime.datetime.strptime('12:10', '%H:%M'), datetime.datetime.strptime('12:45', '%H:%M')],[datetime.datetime.strptime('12:10', '%H:%M'), datetime.datetime.strptime('12:21', '%H:%M')]]
 #print(ob.solve(intervals))
