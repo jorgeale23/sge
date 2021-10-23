@@ -186,8 +186,19 @@ def grafico(request):
 
     h = HorasActivas()
 
-    Consumido[1] = (h.totalhorasluz(10,2021)* 10) / 1000
-    grupos[1]=str(((h.totalhorasluz(10,2021)) * 10) / 1000)
+    for otros in electrodomoestico:
+        Consumido[0] = (Consumido[0] + ((otros.Consumo * (otros.Horas / 60))) * 30)
+    Consumido[0] = Consumido[0] / 1000
+
+    luz = Electrodomestico.objects.filter(Linea=1)
+    consumopromedioluz = 0
+    for luces in luz:
+        consumopromedioluz = consumopromedioluz + luces.Consumo
+    consumopromedioluz = consumopromedioluz / len(luz)
+
+    Consumido[1] = (h.totalhorasluz(datetime.datetime.today().month,datetime.datetime.today().year)* consumopromedioluz) / 1000 #Cantidad de horas que las luces estan encendidas
+    #Se debe tener en cuenta tambien el promedio de consumo de las lamaparas y la cantidad de habitantes
+    grupos[1]=str((h.totalhorasluz(datetime.datetime.today().month,datetime.datetime.today().year) * consumopromedioluz) / 1000)
 
     Disponible = [0, 0, 0]
     indice = np.arange(len(grupos))
